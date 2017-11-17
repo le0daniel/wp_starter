@@ -42,7 +42,7 @@
     "wordpress-install-dir": "web/wp"
   },
   "scripts": {
-    "post-root-package-install": [
+    "post-install-cmd": [
       "php -r \"copy('.env.example', '.env');\"",
       "le0daniel\\System\\ComposerScripts::afterRootInstall"
     ],
