@@ -28,4 +28,4 @@ vendor/*
 
 # Node
 node_modules/*
-!node_modules/.gitignore
+!node_modules/.gitkeep
