@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * Set the root dir!
+ */
+$root_dir = __DIR__;
+
+/**
+ * Make sure composer was loaded!
+ */
+require_once __DIR__.'/vendor/autoload.php';
+
+/**
+ * Init the System!
+ * This does basically just expose the app() function which is used to
+ * boot the app. It's lazy loaded, as long as it is not called, nothing will happen!
+ */
+\le0daniel\System\App::init($root_dir);
+$app = app();
+$app->run();
