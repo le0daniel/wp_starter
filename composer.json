@@ -1,13 +1,13 @@
 {
-  "name": "le0daniel/wp_starter",
-  "type": "project",
-  "license": "MIT",
-  "description": "WP Boilerplate which implements Bedrock",
-  "authors": [
-    {
-      "name": "Leo Studer"
-    }
-  ],
+    "name": "le0daniel/wp_starter",
+    "description": "WP Boilderplate",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "le0daniel",
+            "email": "leodaniel@nitrosoft.ch"
+        }
+    ],
   "config": {
     "preferred-install": "dist"
   },
@@ -17,8 +17,8 @@
       "url": "https://wpackagist.org"
     },
     {
-        "url": "git@github.com:le0daniel/wp_system.git",
-        "type": "git"
+      "url": "git@github.com:le0daniel/wp_system.git",
+      "type": "git"
     }
   ],
   "require": {
