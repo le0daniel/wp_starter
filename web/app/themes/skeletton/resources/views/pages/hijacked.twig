@@ -1,0 +1,9 @@
+{# Disable wp_head and wp_footer, as they have already be called #}
+{% set disable_wp_functions = true %}
+{% extends '@layouts/base.twig' %}
+
+{% block content %}
+    <div class="hijacked-wrapper">
+        {{ content | raw }}
+    </div>
+{% endblock %}

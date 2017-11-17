@@ -1,0 +1,6 @@
+Order Allow,Deny
+
+#Only allow those file types!
+<Files ~ "\.(js|css|png|jpg|jpeg)$">
+   allow from all
+</Files>

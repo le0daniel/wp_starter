@@ -1,0 +1,52 @@
+{% extends '@layouts/base.twig' %}
+
+{% block content %}
+    <hr>
+
+        {% for post in page.posts %}
+
+            <article id="post-{{ post.id }}" class="{{ post.class | join(' ') }}">
+
+                <!-- Title -->
+                <header class="entry-header">
+                    <h1 class="entry-title">{{ post.title }}</h1>
+                </header>
+
+                <!-- Content -->
+                <div class="entry-content">
+                    {# XSS prevention is handled by wordpress/active plugins #}
+                    {{ post.content | raw }}
+
+                    {% if post.field('image') %}
+                        {# Show the Meta image field #}
+                        {% include '@c/image.twig' with {'img':post.field('image'),'caption':true,'size':'medium'} %}
+                    {% else %}
+                        {{ 'No Image!' }}
+                    {% endif %}
+
+                    {# Include Links to the next post #}
+                    {% include '@c/post_links.twig' with {'links':post.links} %}
+                </div>
+
+                <!-- Can Edit? -->
+                {% if post.has_actions %}
+                    <footer class="entry-footer">
+                        <h5>{{ 'Actions' | t }}: </h5>
+
+                        {% for name,link in post.actions %}
+                            <a href="{{ link | raw }}">{{ name | t | capitalize }}</a>
+                        {% endfor %}
+
+                    </footer>
+                {% endif %}
+
+            </article>
+
+        {% else  %}
+
+            <h1>No Content Found!</h1>
+
+        {% endfor %}
+
+    <hr>
+{% endblock %}

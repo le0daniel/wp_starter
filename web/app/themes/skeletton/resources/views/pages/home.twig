@@ -1,0 +1,39 @@
+{% extends '@layouts/base.twig' %}
+{% block content %}
+    <hr>
+
+    {#
+        {% for post in page.posts %}
+
+
+            {{ post | raw }}
+            {{ post.field('image').description | default('null') }}<br>
+            ID: {{ post.id | default('not found') }}
+
+        {% else  %}
+
+        {% endfor %}
+    #}
+
+    {# page.content() is set if there is only one post for that page! #}
+    {% if page.content %}
+        {# Define Post #}
+        {% set post = page.content %}
+
+        {# Returns a Page Object!#}
+        <h4>{{ post.title }}</h4>
+
+        {# Access Meta fields using field('name') or meta('name'),
+           always prefer that to the global field(name,id) function
+           as it is not cached
+        #}
+        Meta Field (image): <b>{{ post.meta('image').description | default('undefined') }}</b>
+
+        {# printing post is equal to post.content #}
+        {{ post | raw }}
+    {% else %}
+        No Content or Multiple Posts (Use `for post in page.posts`)
+    {% endif %}
+
+    <hr>
+{% endblock %}

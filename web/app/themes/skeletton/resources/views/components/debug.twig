@@ -1,0 +1,20 @@
+{# Log the hole context #}
+<script>
+    console.log('Debug Mode!');
+    console.log({{ _context | json_encode | raw }});
+</script>
+
+
+{# Hot reload #}
+{% if hot_reload %}
+    <script id="__bs_script__">//<![CDATA[
+        document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.js?v=2.18.13'><\/script>".replace("HOST", location.hostname));
+        //]]></script>
+{% endif %}
+
+{# Check if Hijacked #}
+{% if hijacked %}
+    <script>
+        console.log('A plugin hijacked this page!');
+    </script>
+{% endif %}

@@ -1,0 +1,2 @@
+msgid "Page Title"
+msgstr "Wow, translated_title"

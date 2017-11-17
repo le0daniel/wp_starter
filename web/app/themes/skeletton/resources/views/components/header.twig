@@ -1,0 +1,17 @@
+<header id="header">
+    <div class="wrapper">
+
+        <h5>Header: {{ site.title }}</h5>
+
+        <nav id="nav-main" class="nav-main" role="navigation">
+
+            {{  function('wp_get_nav_menu_items',1) | json_encode }}
+
+
+            {#
+             # {% include "menu.twig" with {'menu': menu.get_items} %}
+             #}
+        </nav>
+
+    </div>
+</header>

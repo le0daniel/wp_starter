@@ -1,0 +1,83 @@
+{#
+    Every child template can/should extend on:
+    -   head
+    -   header
+    -   content
+    -   footer
+    -   script
+
+    Helper Functions
+    -   function() to call a global function, the content is escaped, so use the Raw filter on it!
+#}
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie ie6 lt-ie9 lt-ie8 lt-ie7" {{ site.language_attributes }}> <![endif]-->
+<!--[if IE 7]><html class="no-js ie ie7 lt-ie9 lt-ie8" {{ site.language_attributes }}> <![endif]-->
+<!--[if IE 8]><html class="no-js ie ie8 lt-ie9" {{ site.language_attributes }}> <![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" {{ site.language_attributes }}> <!--<![endif]-->
+<head>
+    <meta charset="{{ site.charset }}" />
+    <title>{{ site.title }}</title>
+
+    <!-- Meta -->
+    {% include '@c/meta.twig' %}
+
+    <link rel="author" href="{{ 'humans.txt' | theme_path }}" />
+    <link rel="pingback" href="{{ site.pingback_url | default('') }}" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ 'style.css' | static_path }}" type="text/css" media="screen" />
+
+    {# Block that can be extended by the template! #}
+    {% block head %}{% endblock %}
+
+    {# Wordpress Head Content #}
+    {% if not disable_wp_functions %}
+        {{ function('wp_head') | raw }}
+    {% endif %}
+</head>
+<body class="{{page.body.class | join(' ') }}">
+
+    {# Header #}
+    {% block header %}
+        {% include '@c/header.twig' %}
+    {% endblock %}
+
+    <main id="content" class="content" role="main" >
+
+        <div class="wrapper {{sidebar_class}}">
+
+            {# This Block should be extended by the individual Template! #}
+            {% block content %}{% endblock %}
+
+        </div>
+
+        {# include the sidebar if present #}
+        {% if sidebar %}
+            <aside class="layout-sidebar">
+                {{ sidebar }}
+            </aside>
+        {% endif %}
+
+    </main>
+
+    {# Footer #}
+    {% block footer %}
+        {% include '@c/footer.twig' %}
+    {% endblock %}
+
+    {# Additionl scripts #}
+    {% block script %}
+        <script type="application/javascript" src="{{ 'script.js' | static_path }}"></script>
+    {% endblock %}
+
+    {# Show debug notices #}
+    {% if debug %}
+        {% include '@c/debug.twig' ignore missing %}
+    {% endif %}
+
+    {# Wordpress Footer Content #}
+    {% if not disable_wp_functions %}
+        {{ function('wp_footer') | raw }}
+    {% endif %}
+</body>
+</html>
