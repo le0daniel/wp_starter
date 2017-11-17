@@ -1,0 +1,28 @@
+<?php
+
+/* Set Dir */
+chdir(__DIR__);
+$root_dir = __DIR__;
+
+/* Copy Files */
+copy('.env.example', '.env');
+
+/* Autoload */
+require_once 'vendor/autoload.php';
+
+/* Init */
+\le0daniel\System\App::init($root_dir);
+
+$console = app()->getContainer()->make('console',[]);
+$console->add(resolve(\le0daniel\System\Console\Commands\CreateTheme::class));
+$console->setAutoExit(false);
+$console->setName('Installer');
+$console->setVersion('1.0.0');
+
+$console->run(new \Symfony\Component\Console\Input\ArgvInput([
+	'script.php',
+	'new:theme'
+]));
+
+/* Self Destroy! */
+unlink(__DIR__.'/installer');
