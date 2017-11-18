@@ -2,7 +2,7 @@
 /* %NameSpace% */
 
 use le0daniel\System\App;
-use le0daniel\System\Helpers\TwigFilters;
+use le0daniel\System\Helpers\Language;
 /* %UseWPExtender% */
 
 /**
@@ -43,7 +43,7 @@ App::init($GLOBALS['root_dir']);
 
 /* Load the translation file */
 load_theme_textdomain($theme_name,__DIR__.'/resources/lang/');
-TwigFilters::$translation_context = $theme_name;
+Language::$translation_context = $theme_name;
 
 /* Configure the view */
 view()
