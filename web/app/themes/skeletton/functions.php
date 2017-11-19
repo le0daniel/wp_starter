@@ -45,6 +45,12 @@ App::init($GLOBALS['root_dir']);
 load_theme_textdomain($theme_name,__DIR__.'/resources/lang/');
 Language::$translation_context = $theme_name;
 
+/* Lets WP Handle the Title */
+//add_theme_support( 'title-tag' );
+
+/* Setup HTML 5 Support */
+//add_theme_support( 'html5', [ 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption', ]);
+
 /* Configure the view */
 view()
 	->setRootDir($view_root)
