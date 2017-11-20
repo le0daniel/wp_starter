@@ -9,7 +9,6 @@
 /* %NameSpace% */
 
 use le0daniel\System\WordPress\Extend\AddLogic;
-use Themes\Skeletton\App\ShortCodes\TestCode;
 
 /**
  * Class WordPressExtender
