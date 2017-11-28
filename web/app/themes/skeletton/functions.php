@@ -3,6 +3,7 @@
 
 use le0daniel\System\App;
 use le0daniel\System\Helpers\Language;
+use le0daniel\System\Helpers\Path;
 /* %UseWPExtender% */
 
 /**
@@ -42,6 +43,7 @@ App::init($GLOBALS['root_dir']);
  */
 load_theme_textdomain($theme_name,__DIR__.'/resources/lang/');
 Language::$translation_context = $theme_name;
+Path::$theme_dirname = $theme_name;
 
 /* Lets WP Handle the Title */
 //add_theme_support( 'title-tag' );

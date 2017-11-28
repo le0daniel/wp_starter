@@ -54,4 +54,5 @@ mix.js(
     .sass(
         /* From */ theme_path('resources/assets/scss/style.scss'),
         /* To   */ theme_path('static/style.css')
-    );
+    )
+    .version();
