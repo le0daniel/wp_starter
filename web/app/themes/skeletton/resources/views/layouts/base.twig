@@ -25,7 +25,7 @@
     <link rel="pingback" href="{{ site.pingback_url | default('') }}" />
 
     <!-- CSS -->
-    <link rel="stylesheet" href="{{ 'style.css' | static_path }}" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{{ 'style.css' | mix }}" type="text/css" media="screen" />
 
     {# Block that can be extended by the template! #}
     {% block head %}{% endblock %}
@@ -34,6 +34,11 @@
     {% if not disable_wp_functions %}
         {{ function('wp_head') | raw }}
     {% endif %}
+
+    {# Remove no-js #}
+    <script type="application/javascript">
+        document.getElementsByTagName("html")[0].classList.remove('no-js');
+    </script>
 </head>
 <body class="{{page.body.class | join(' ') }}">
 
@@ -67,7 +72,7 @@
 
     {# Additionl scripts #}
     {% block script %}
-        <script type="application/javascript" src="{{ 'script.js' | static_path }}"></script>
+        <script type="application/javascript" src="{{ 'script.js' | mix }}"></script>
     {% endblock %}
 
     {# Show debug notices #}
