@@ -1,6 +1,7 @@
 <?php
 
 /* Set Dir */
+define('WP_DEBUG', true);
 chdir(__DIR__);
 $root_dir = __DIR__;
 
