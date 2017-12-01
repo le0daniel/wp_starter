@@ -17,6 +17,15 @@ use le0daniel\System\WordPress\Extend\AddLogic;
 class WordPressExtender extends AddLogic {
 
 	/**
+	 * Add Post Types
+	 *
+	 * @var array
+	 */
+	protected $post_types = [
+
+	];
+
+	/**
 	 * Contains Shortcodes
 	 *
 	 * @var array
