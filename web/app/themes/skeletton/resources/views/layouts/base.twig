@@ -10,16 +10,17 @@
     -   function() to call a global function, the content is escaped, so use the Raw filter on it!
 #}
 <!doctype html>
-<!--[if lt IE 7]><html class="no-js ie ie6 lt-ie9 lt-ie8 lt-ie7" {{ site.language_attributes }}> <![endif]-->
-<!--[if IE 7]><html class="no-js ie ie7 lt-ie9 lt-ie8" {{ site.language_attributes }}> <![endif]-->
-<!--[if IE 8]><html class="no-js ie ie8 lt-ie9" {{ site.language_attributes }}> <![endif]-->
-<!--[if gt IE 8]><!--><html class="no-js" {{ site.language_attributes }}> <!--<![endif]-->
+<html lang="{{ site.language }}" dir="ltr" class="no-js">
 <head>
-    <meta charset="{{ site.charset }}" />
-    <title>{{ site.title }}</title>
+
+    <!-- Title Tag -->
+    <title>{{ page.content.meta('seo_title') | default( site.title ) | eclipe }}</title>
 
     <!-- Meta -->
     {% include '@c/meta.twig' %}
+
+    <!-- FavIcon -->
+    <link rel="icon" type="image/png" href="{{ 'favicon.png' | static_path }}">
 
     <link rel="author" href="{{ 'humans.txt' | theme_path }}" />
     <link rel="pingback" href="{{ site.pingback_url | default('') }}" />
@@ -35,9 +36,12 @@
         {{ function('wp_head') | raw }}
     {% endif %}
 
+    {# Analytics #}
+    {% include '@c/analytics.twig' ignore missing %}
+
     {# Remove no-js #}
     <script type="application/javascript">
-        document.getElementsByTagName("html")[0].classList.remove('no-js');
+        document.getElementsByTagName("html")[0].className = 'js';
     </script>
 </head>
 <body class="{{page.body.class | join(' ') }}">
@@ -47,7 +51,7 @@
         {% include '@c/header.twig' %}
     {% endblock %}
 
-    <main id="content" class="content" role="main" >
+    <main id="content" class="content" role="main">
 
         <div class="wrapper {{sidebar_class}}">
 

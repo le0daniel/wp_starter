@@ -1,11 +1,27 @@
-
 <!-- General Meta Tags -->
-<meta name="description"            content="{{ site.description | default('') }}">
-<meta name="viewport"               content="width=device-width, initial-scale=1.0">
+<meta charset="{{ site.charset }}" />
 <meta http-equiv="Content-Type"     content="text/html; charset=UTF-8" />
-<meta http-equiv="X-UA-Compatible"  content="IE=edge">
 
-{# Injected Meta Tags #}
-{% for name,content in meta_tags %}
-    <meta name="{{ name }}" content="{{ content }}">
-{% endfor %}
+<!-- SEO -->
+<meta name="description"            content="{{ page.content.meta('seo_description') | default(site.description) | default('No Description available') | eclipe(150) }}">
+
+<!-- Device -->
+<meta name="viewport"               content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="x-ua-compatible"  content="ie=edge">
+
+{% if supports.apple %}
+    <!-- Apple Meta Tags -->
+    <link rel="apple-touch-icon" href="{{ 'favicon_200x200.png' | static_path }}">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+{% endif %}
+
+{% if supports.microsoft_tiles %}
+    <!-- Microsoft Tiles -->
+    <meta name="msapplication-config" content="{{ 'browserconfig.xml' | static_path }}" />
+{% endif %}
+
+{% if supports.social_tags %}
+    <!-- Social Tags -->
+    {% include '@c/meta.social.twig' %}
+{% endif %}

@@ -63,8 +63,11 @@ view()
 	/* Add The context */
 	->addContext( resolve('wp.context') )
 
-	/* Share some data! */
-	->share('meta_tags',[]);
+	->share('supports',[
+		'apple'=>false,
+		'microsoft_tiles'=>false,
+		'social_tags'=>false,
+	]);
 
 /**
  * Extend Wordpress
