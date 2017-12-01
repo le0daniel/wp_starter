@@ -63,6 +63,7 @@ view()
 	/* Add The context */
 	->addContext( resolve('wp.context') )
 
+	/* Set what is supported! */
 	->share('supports',[
 		'apple'=>false,
 		'microsoft_tiles'=>false,
