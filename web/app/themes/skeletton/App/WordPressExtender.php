@@ -17,6 +17,17 @@ use le0daniel\System\WordPress\Extend\AddLogic;
 class WordPressExtender extends AddLogic {
 
 	/**
+	 * Add Navs
+	 * slug / id => Human Readable Name
+	 *
+	 * @var array
+	 */
+	protected $navs = [
+
+	];
+
+
+	/**
 	 * Add Post Types
 	 *
 	 * @var array
@@ -31,6 +42,7 @@ class WordPressExtender extends AddLogic {
 	 * @var array
 	 */
 	protected $shortcodes = [
+
 	];
 
 }

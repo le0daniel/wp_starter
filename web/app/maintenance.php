@@ -5,8 +5,6 @@
  * Date: 05.12.17
  * Time: 15:20
  */
-
-
 $to_wait = time() - $GLOBALS['upgrading'];
 
 /* set Wait header */
