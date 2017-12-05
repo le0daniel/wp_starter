@@ -5,6 +5,17 @@
  * Date: 05.12.17
  * Time: 15:20
  */
+
+$to_wait = time() - $GLOBALS['upgrading'];
+
+/* set Wait header */
+if( $to_wait > 0 && $to_wait <= 600 ){
+	header( sprintf('Retry-After: %d',$to_wait) );
+}
+header( "Maintenance - 503 Service Unavailable", true, 503 );
+header( 'Content-Type: text/html; charset=utf-8' );
+
+/* Output minimal HTML */
 ?>
 <html>
 
@@ -29,9 +40,7 @@
 	</style>
 </head>
 <body>
-
 	<h1>- We'll be back soon -</h1>
-
 </body>
 </html>
 <?php die(); ?>
