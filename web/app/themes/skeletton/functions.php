@@ -60,8 +60,16 @@ view()
 	->addIncludePath($view_root.'/layouts',   'layouts')
 	->addIncludePath($view_root.'/shortcodes','shorts')
 
-	/* Add The context */
-	->addContext( resolve('wp.context') )
+	/**
+	 * Add The context, default is wp.context
+	 * --> \System\Wordpress\Context good point to extend
+	 *
+	 * Must implement CastArray contract
+	 *
+	 * Is lazy loaded! Resolved when needed!
+	 * will be resolve container!
+	 */
+	//->addContext( 'wp.context' )
 
 	/* Set what is supported! */
 	->share('supports',[
