@@ -24,6 +24,15 @@ const mix = require('laravel-mix');
 mix.setPublicPath(relative_theme_root_path + '/' + theme_name + '/static')
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
+/*
+ |--------------------------------------------------------------------------
+ | Mix Webpack Config
+ |--------------------------------------------------------------------------
+ |
+ | Edit the Mix webpack config. It will be merged with the default config
+ | file from mix!
+ |
+ */
 mix.webpackConfig({
     plugins: [
         new BrowserSyncPlugin({
@@ -37,6 +46,23 @@ mix.webpackConfig({
         publicPath: '/app/themes/'+ theme_name +'/static/'
     }
 });
+
+/*
+ |--------------------------------------------------------------------------
+ | Mix Options
+ |--------------------------------------------------------------------------
+ |
+ | Setup the Mix options
+ |
+ */
+mix.options({
+    extractVueStyles: true,
+});
+
+mix.extract([
+    'vue'
+]);
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
