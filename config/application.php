@@ -86,3 +86,4 @@ if (!defined('ABSPATH')) {
  * Custom System Settings
  */
 define('HOT_RELOAD',env('HOT_RELOAD',false));
+define('EXPOSE_DURATION',env('EXPOSE_DURATION',false));

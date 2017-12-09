@@ -12,10 +12,3 @@
         document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.js?v=2.18.13'><\/script>".replace("HOST", location.hostname));
         //]]></script>
 {% endif %}
-
-{# Check if Hijacked #}
-{% if hijacked %}
-    <script>
-        console.log('A plugin hijacked this page!');
-    </script>
-{% endif %}
