@@ -31,6 +31,7 @@ if( ! class_exists(App::class) || ! function_exists('app') ){
  * -------------------------------------------------------------
  * Register all needed Paths and namespaces
  */
+App::$config_dir = __DIR__.'/App/config';
 load_theme_textdomain($theme_name,__DIR__.'/resources/lang/');
 Language::$translation_context = $theme_name;
 Path::$theme_dirname = $theme_name;
@@ -42,6 +43,10 @@ Path::$theme_dirname = $theme_name;
  * Bindings
  * -------------------------------------------------------------
  * Register the needed bindings to run the App
+ *
+ * Here is the best point to change default classes like the
+ * Wordpress\Context Class (extend|replace ...)
+ * +--> bind('wp.context',MyClassWhichExtendsContext::class)
  */
 $app = app();
 $app->bind(AddLogicToWordpress::class,WordPressExtender::class);
