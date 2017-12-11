@@ -26,6 +26,14 @@
     <link rel="pingback" href="{{ site.pingback_url | default('') }}" />
 
     <!-- CSS -->
+    {##
+     # Use mix filter for all assets generated with mix. Paths are relative to
+     # static/ {{ path }} and will have the generated version hash for reloading
+     # without cache, same for JavaScripts
+     #
+     # Make sure to run: user$ npm run production
+     # For deployment
+     #}
     <link rel="stylesheet" href="{{ 'style.css' | mix }}" type="text/css" media="screen" />
 
     {# Block that can be extended by the template! #}
