@@ -4,6 +4,7 @@
 use le0daniel\System\App;
 use le0daniel\System\Helpers\Language;
 use le0daniel\System\Helpers\Path;
+use le0daniel\System\Contracts\AddLogicToWordpress;
 /* %UseWPExtender% */
 
 /**
