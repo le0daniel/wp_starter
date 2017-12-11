@@ -17,14 +17,55 @@ use le0daniel\System\Contracts\AddLogicToWordpress;
 $view_root  = __DIR__.'/resources/views';
 
 /**
+ * -------------------------------------------------------------
+ * Check for App Existance
+ * -------------------------------------------------------------
  * Checks if the App is available! If not, it fails!
  * Important, if you don't use the starter theme you
- * might need to init the App using App::init($root_dir)
+ * might need to init the App yourself using App::init($root_dir)
+ *
+ * $root_dir should be outside the webroot!
  */
 if( ! class_exists(App::class) || ! function_exists('app') ){
 	echo 'Application not loaded!'.PHP_EOL;
 	die();
 }
+
+/**
+ * -------------------------------------------------------------
+ * Explanation & config
+ * -------------------------------------------------------------
+ * You can use the Default config dir if you don't set the
+ * config dir! Not needed if you don't register any
+ * Service Provider
+ *
+ * IMPORTANT: All described command should be runned in the root
+ *            dir!
+ *
+ * In the App directory you find the most logic:
+ * --> PostTypes are a easy way to define custom Post types
+ * --> ShortCodes are an easy way to generate Shortcodes and
+ *     VisualComposer components & separating Logic from templates
+ * --> ServiceProviders are used to add Services to the App,
+ *     they must implement register and boot methods
+ *
+ * Use php console make:(shortcut|posttype) to generate Shorcuts
+ * and Posttypes interactively!
+ *
+ * In the resource directory you find all Assets & View
+ * --> views: includes all templates (Twig template engine)
+ *     (https://twig.symfony.com/doc/2.x/templates.html)
+ * --> assets/(js|scss) all compiled with laravel mix (WebPack Wrapper)
+ *     check /webpack.mix.js
+ *     Version control is enabled, use mix filter in Twig, always export to static
+ *     Commands: $ npm run watch (Hot reload for dev, make sure to enable it in .env)
+ *               $ npm run dev   (Same config as watch, but no reload)
+ *               $ npm run production (All assets minified and assembled)
+ *     (https://github.com/JeffreyWay/laravel-mix/blob/master/docs/basic-example.md)
+ * --> lang/ contains language files, namespace is always the $theme_name
+ * --> static/ contains all rendered assets!
+ */
+App::$config_dir = __DIR__.'/App/config';
 
 /**
  * -------------------------------------------------------------
@@ -42,7 +83,7 @@ if( ! class_exists(App::class) || ! function_exists('app') ){
  * Sets the Theme dirname!
  * Is used for path generateion! Do not change!
  */
-App::$config_dir = __DIR__.'/App/config';
+
 load_theme_textdomain($theme_name,__DIR__.'/resources/lang/');
 Language::$translation_context = $theme_name;
 Path::$theme_dirname = $theme_name;
@@ -115,12 +156,12 @@ view()
  * To follow the MVC Pattern, use the individual files as
  * Controllers, which should only pass data to the view!
  *
- * You can use them as classes to, just declare a class and define
+ * You can use them as classes too, just declare a class and define
  * a render method which should return an array [template, data]
- * The controller Class and method is resolved through the container
+ * The controller Class and method are resolved through the container
  * so you can Type Hint!
  *
  * To use this feature, set map_controllers_to_classes to true in
- * the config file
+ * the config file, should not have any impact on performance
  */
 $app->run();
