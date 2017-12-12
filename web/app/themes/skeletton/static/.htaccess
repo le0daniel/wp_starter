@@ -1,3 +1,16 @@
+# Allow, only deny if needed
+Order Deny,Allow
+
 <filesMatch ".(css|jpg|jpeg|png|gif|js|ico)$">
 Header set Cache-Control "max-age=2592000, public"
 </filesMatch>
+
+# Only Allows for JS | CSS | imgs... edit if you have special types
+# It rewrites URLs to have a better cache name instead of query parameter
+# Better for caching with google and so
+# Requires to use mix(true) as filter
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule !(.*)\.(css|jpg|jpeg|png|gif|js|ico)$ - [L,F]
+RewriteRule ^([a-z0-9]+)/([a-zA-Z0-9_]+)\.(js|css)$ $2.$3 [L]
+</IfModule>

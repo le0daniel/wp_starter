@@ -1,10 +1,1 @@
-
-# Only Allows for JS | CSS | imgs... edit if you have special types
-# It rewrites URLs to have a better cache name instead of query parameter
-# Better for caching with google and so
-# Requires to use mix(true) as filter
-<IfModule mod_rewrite.c>
-RewriteEngine On
-RewriteRule !(.*)\.(js|css|png|jpeg|ico|jpg)$ - [L,F]
-RewriteRule static/([a-zA-Z0-9]+)/([a-zA-Z0-9_]+)\.(js|css)$ static/$2.$3 [L]
-</IfModule>
+Deny from all

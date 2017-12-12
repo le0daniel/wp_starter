@@ -5,6 +5,34 @@
     console.log({{ debug | json_encode | raw }});
 </script>
 
+<!-- Show Debug element and remove after 3s -->
+<style>
+    #as079_debug{
+        display: block;
+        position: absolute;
+        padding: 20px;
+        top: 10px;
+        right: 10px;
+
+        background-color: #e6db55;
+        border-radius: 2px;
+        z-index: 10000000;
+        opacity: 0.8;
+
+        transition: opacity 0.3s ease-out;
+    }
+    #as079_debug:hover{
+        opacity: 1.0;
+    }
+</style>
+<div id="as079_debug">
+    <span>Debug mode</span>
+</div>
+<script>
+    setTimeout(function(){
+        document.getElementById('as079_debug').remove();
+    },3000);
+</script>
 
 {# Hot reload #}
 {% if hot_reload %}
