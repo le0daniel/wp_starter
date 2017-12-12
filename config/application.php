@@ -87,3 +87,4 @@ if (!defined('ABSPATH')) {
  */
 define('HOT_RELOAD',env('HOT_RELOAD',false));
 define('EXPOSE_DURATION',env('EXPOSE_DURATION',false));
+define('DISABLE_SECURITY_HEADERS',env('DISABLE_SECURITY_HEADERS',false));
