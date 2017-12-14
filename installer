@@ -14,7 +14,8 @@ require_once 'vendor/autoload.php';
 /* Init */
 \le0daniel\System\App::init($root_dir);
 
-$console = app()->getContainer()->make('console',[]);
+/** @var \Symfony\Component\Console\Application $console */
+$console = app()->make(\Symfony\Component\Console\Application::class,[]);
 $console->add(resolve(\le0daniel\System\Console\Commands\CreateTheme::class));
 $console->setAutoExit(false);
 $console->setName('Installer');
