@@ -11,6 +11,9 @@ copy('.env.example', '.env');
 /* Autoload */
 require_once 'vendor/autoload.php';
 
+/* Require config! */
+require_once __DIR__.'/config/application.php';
+
 /* Init */
 \le0daniel\System\App::init($root_dir);
 

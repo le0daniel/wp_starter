@@ -11,6 +11,11 @@ $root_dir = __DIR__;
 require_once __DIR__.'/vendor/autoload.php';
 
 /**
+ * Require WP Config
+ */
+require_once __DIR__.'/config/application.php';
+
+/**
  * Init the System!
  * This does basically just expose the app() function which is used to
  * boot the app. It's lazy loaded, as long as it is not called, nothing will happen!
