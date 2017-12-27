@@ -7,6 +7,14 @@ $root_dir = dirname(__DIR__);
 $webroot_dir = $root_dir . '/public_html';
 
 /**
+ * Configure Theme Dirname here! Important if you use the command
+ * Line!
+ *
+ * @var theme_dirname
+ */
+/* %ThemeName% */
+
+/**
  * Expose global env() function from oscarotero/env
  */
 Env::init();

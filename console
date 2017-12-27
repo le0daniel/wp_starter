@@ -1,11 +1,6 @@
 <?php
 
 /**
- * Set the root dir!
- */
-$root_dir = __DIR__;
-
-/**
  * Make sure composer was loaded!
  */
 require_once __DIR__.'/vendor/autoload.php';

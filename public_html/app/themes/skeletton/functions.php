@@ -39,7 +39,7 @@ if( ! class_exists(App::class) || ! function_exists('app') ){
  * config dir! Not needed if you don't register any
  * Service Provider
  *
- * IMPORTANT: All described command should be runned in the root
+ * IMPORTANT: All described commands should be runned in the root
  *            dir!
  *
  * In the App directory you find the most logic:
@@ -65,7 +65,12 @@ if( ! class_exists(App::class) || ! function_exists('app') ){
  * --> lang/ contains language files, namespace is always the $theme_name
  * --> static/ contains all rendered assets!
  */
-App::$config_dir = $GLOBALS['root_dir'].'/config';
+
+
+/**
+ * Configure in /config/application.php if possible!
+ * @var theme_dirname */
+//Path::$theme_dirname = $theme_name;
 
 /**
  * -------------------------------------------------------------
@@ -86,7 +91,7 @@ App::$config_dir = $GLOBALS['root_dir'].'/config';
 
 load_theme_textdomain($theme_name,__DIR__.'/resources/lang/');
 Language::$translation_context = $theme_name;
-Path::$theme_dirname = $theme_name;
+
 
 /**
  * -------------------------------------------------------------
