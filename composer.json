@@ -33,11 +33,11 @@
   },
   "extra": {
     "installer-paths": {
-      "public_html/app/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
-      "public_html/app/plugins/{$name}/": ["type:wordpress-plugin"],
-      "public_html/app/themes/{$name}/": ["type:wordpress-theme"]
+      "public/app/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
+      "public/app/plugins/{$name}/": ["type:wordpress-plugin"],
+      "public/app/themes/{$name}/": ["type:wordpress-theme"]
     },
-    "wordpress-install-dir": "public_html/wp"
+    "wordpress-install-dir": "public/wp"
   },
   "scripts": {
     "test": [
