@@ -4,7 +4,7 @@
 $root_dir = dirname(__DIR__);
 
 /** @var string Document Root */
-$webroot_dir = $root_dir . '/public_html';
+$webroot_dir = $root_dir . '/public';
 
 /**
  * Configure Theme Dirname here! Important if you use the command
