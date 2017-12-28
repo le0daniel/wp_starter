@@ -68,11 +68,6 @@ if( ! class_exists(App::class) || ! function_exists('app') ){
 
 
 /**
- * Configure in /config/application.php if possible!
- * @var theme_dirname */
-//Path::$theme_dirname = $theme_name;
-
-/**
  * -------------------------------------------------------------
  * Paths & Namespaces
  * -------------------------------------------------------------
@@ -133,7 +128,6 @@ $app->bind(AddLogicToWordpress::class,WordPressExtender::class);
  */
 view()
 	->setRootDir($view_root)
-	//->setPlainCache(true)
 	->addIncludePath($view_root.'/components','c')
 	->addIncludePath($view_root.'/pages',     'pages')
 	->addIncludePath($view_root.'/layouts',   'layouts')

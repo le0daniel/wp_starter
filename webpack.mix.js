@@ -37,7 +37,10 @@ mix.webpackConfig({
     plugins: [
         new BrowserSyncPlugin({
             files: [].concat(
-                assets_to_watch('resources/assets/**/*','resources/views/**/*')
+                assets_to_watch(
+                    'resources/assets/**/*',
+                    'resources/views/**/*'
+                )
             )
         }),
     ],

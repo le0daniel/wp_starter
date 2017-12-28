@@ -2,6 +2,7 @@
     "name": "le0daniel/wp_starter",
     "description": "WP Boilderplate",
     "license": "MIT",
+    "type": "project",
     "authors": [
         {
             "name": "le0daniel",
@@ -38,10 +39,5 @@
       "public/app/themes/{$name}/": ["type:wordpress-theme"]
     },
     "wordpress-install-dir": "public/wp"
-  },
-  "scripts": {
-    "test": [
-      "vendor/bin/phpcs"
-    ]
   }
 }
