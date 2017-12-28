@@ -1,91 +1,236 @@
-# [Bedrock](https://roots.io/bedrock/)
-[![Packagist](https://img.shields.io/packagist/v/roots/bedrock.svg?style=flat-square)](https://packagist.org/packages/roots/bedrock)
-[![Build Status](https://img.shields.io/travis/roots/bedrock.svg?style=flat-square)](https://travis-ci.org/roots/bedrock)
+# Wordpress Starter (Integration: wp_system)
 
-Bedrock is a modern WordPress stack that helps you get started with the best development tools and project structure.
+This is the official documentation of le0daniel/wp_system
 
-Much of the philosophy behind Bedrock is inspired by the [Twelve-Factor App](http://12factor.net/) methodology including the [WordPress specific version](https://roots.io/twelve-factor-wordpress/).
+It is based on a custom version of Bedrock ([roots.io](roots.io)) and integrates the wp_system. The goal of the system is to have modern PHP tools for creating your **custom** WP Theme. It includes:
 
-## Features
+* The powerful [Laravel](https://laravel.com) 5 Service Container (Dependency injection, Type Hinting), 
+* [Symfony Twig](https://twig.symfony.com/) 2 as Templating engine
+* [Symfony Console](http://symfony.com/doc/current/components/console.html) for interacting with the App
+  * [Symfony Process](http://symfony.com/doc/current/components/process.html) 
+* Clear File Structure (almost same as [Bedrock](https://roots.io/bedrock/), except web -> public)
+  * Must use plugins
+  * .env config with different config files per environment
+  * composer for dependency management
+* Mix (webpack) for versioning and compiling assets (js|css)
 
-* Better folder structure
-* Dependency management with [Composer](http://getcomposer.org)
-* Easy WordPress configuration with environment specific files
-* Environment variables with [Dotenv](https://github.com/vlucas/phpdotenv)
-* Autoloader for mu-plugins (use regular plugins as mu-plugins)
-* Enhanced security (separated web root and secure passwords with [wp-password-bcrypt](https://github.com/roots/wp-password-bcrypt))
 
-Use [Trellis](https://github.com/roots/trellis) for additional features:
 
-* Easy development environments with [Vagrant](http://www.vagrantup.com/)
-* Easy server provisioning with [Ansible](http://www.ansible.com/) (Ubuntu 16.04, PHP 7.1, MariaDB)
-* One-command deploys
+## File Structure
 
-See a complete working example in the [roots-example-project.com repo](https://github.com/roots/roots-example-project.com).
+```
+YourProject/
+|—— cache/
+|   |—— rendered/
+|   |—— twig/
+|—— config/
+|   |—— application.php
+|   |—— system.php
+|   |—— environments/
+|       |—— development.php
+|       |—— production.php
+|       |—— staging.php
+|—— public/
+|   |—— app/
+|       |—— mu-plugins/
+|       |—— plugins/
+|       |—— themes/
+|       |—— uploads/
+|       |—— maintenance.php
+|   |—— wp/
+|   |—— wp-config.php
+|   |—— index.php
+|   |—— .htaccess
+|—— storage/
+|   |—— log/
+|—— vendor/
+|—— node_modules/
+```
 
-## Requirements
+The web root is `public` 
 
-* PHP >= 5.6
-* Composer - [Install](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
+For better organizaion `wp-content` is in `app` and Wordpress is in `wp` and all dependencies, configurations, files are kept out of the web root itself.
+
+**Theme Structure**
+
+```
+YourProject/public/app/themes/YourTheme
+|—— App/
+|   |—— PostTypes/
+|   |—— ServiceProvider/
+|   |—— ShortCodes/
+|   |—— WordPressExtender.php
+|—— resources/
+|   |—— assets/
+|       |—— js/
+|       |—— scss/
+|   |—— lang/
+|   |—— views/
+|       |—— components/
+|       |—— layouts/
+|       |—— pages/
+|       |—— shortcodes/
+|—— static/
+|—— functions.php
+|—— style.css
+```
+
+The goal is to keep a clear structure in the Theme. All files which are accessed over the internet should be in the static folder. By default, webpack compiles Js / Scss (script.js/style.scss) to static/
+
+The `functions.php` file contains the configuration of the Application and some Bindings. Configure your theme here. 
+
+The `WordPressExtender.php` wraps some common tasks (shortcodes including visual composer componets, navs, posttypes) and simplifies them by giveing them a clear structure.
+
+All logic should be placed into the default wordpress templates (seen as controllers) and then passed to Twig to render (more in the view section).
+
+
 
 ## Installation
 
-1. Create a new project in a new folder for your project:
+**Requirements**
 
-  `composer create-project roots/bedrock your-project-folder-name`
+* composer
+* PHP >= 7
 
-2. Update environment variables in `.env`  file:
-  * `DB_NAME` - Database name
-  * `DB_USER` - Database user
-  * `DB_PASSWORD` - Database password
-  * `DB_HOST` - Database host
-  * `WP_ENV` - Set to environment (`development`, `staging`, `production`)
-  * `WP_HOME` - Full URL to WordPress home (http://example.com)
-  * `WP_SITEURL` - Full URL to WordPress including subdirectory (http://example.com/wp)
-  * `AUTH_KEY`, `SECURE_AUTH_KEY`, `LOGGED_IN_KEY`, `NONCE_KEY`, `AUTH_SALT`, `SECURE_AUTH_SALT`, `LOGGED_IN_SALT`, `NONCE_SALT`
+To install in the directory YourProjectName run:
 
-  If you want to automatically generate the security keys (assuming you have wp-cli installed locally) you can use the very handy [wp-cli-dotenv-command][wp-cli-dotenv]:
+ `composer create-project le0daniel\wp_starter YourProjectName`
 
-      wp package install aaemnnosttv/wp-cli-dotenv-command
+After the installation `cd YourProjectName ` and run the installer `php installer`
 
-      wp dotenv salts regenerate
+This will help you create your theme with the correct namespace, connect to the DB. After this, take a look at the options in your `.env` file.
 
-  Or, you can cut and paste from the [Roots WordPress Salt Generator][roots-wp-salt].
+```
+# Enables reloding of assets if you run 'npm run watch'
+HOT_RELOAD=false
 
-3. Add theme(s) in `web/app/themes` as you would for a normal WordPress site.
+# Exposes the duration the request took
+EXPOSE_DURATION=false
 
-4. Set your site vhost document root to `/path/to/site/web/` (`/path/to/site/current/web/` if using deploys)
+# Disable setting of security headers like 'X-FRAME-OPTIONS'
+DISABLE_SECURITY_HEADERS=false
 
-5. Access WP admin at `http://example.com/wp/wp-admin`
+# Your environment and URL
+WP_ENV=development
+WP_HOME=http://mywordpress.localhost
 
-## Deploys
+# Salts, generate them using wp dotenv 
+```
 
-There are two methods to deploy Bedrock sites out of the box:
+**After you're done, it's important to run** `composer dump-autoload` **because psr-4 autoloading paths have changed**
 
-* [Trellis](https://github.com/roots/trellis)
-* [bedrock-capistrano](https://github.com/roots/bedrock-capistrano)
+**Now you are ready**
 
-Any other deployment method can be used as well with one requirement:
 
-`composer install` must be run as part of the deploy process.
 
-## Documentation
+## functions.php
 
-Bedrock documentation is available at [https://roots.io/bedrock/docs/](https://roots.io/bedrock/docs/).
+First of all, namespaces are used and should be used where possible. The file contains basic configuration, like `$theme_name`  `$view_root`  and the usual wordpress theme setting. 
 
-## Contributing
+More important are the **bindings**. By default everything is resolved through the [Laravel Service Container](https://laravel.com/docs/5.5/container). You can overwrite everything the app uses. 
 
-Contributions are welcome from everyone. We have [contributing guidelines](https://github.com/roots/guidelines/blob/master/CONTRIBUTING.md) to help you get started.
+You can either add your bindings into the functions file or you can simply create and register (config/system) a ServiceProvider.
 
-## Community
+Following aliases can easylie be overwritten to add more specific functionality. Your class should always extend the base class to keep functionality. Take a look at the individual pages for more information about what they provide. A lot is also explained in the view section.
 
-Keep track of development and community news.
+```php
+/* Get the dependency container through the app helper */
+$app = app();
 
-* Participate on the [Roots Discourse](https://discourse.roots.io/)
-* Follow [@rootswp on Twitter](https://twitter.com/rootswp)
-* Read and subscribe to the [Roots Blog](https://roots.io/blog/)
-* Subscribe to the [Roots Newsletter](https://roots.io/subscribe/)
-* Listen to the [Roots Radio podcast](https://roots.io/podcast/)
+/* Create your individual bindings */
+$app->bind('wp.context',	YourClass::class); // le0daniel\System\WordPress\Context 
+$app->bind('wp.metafield',	YourClass::class); // le0daniel\System\WordPress\MetaField
+$app->bind('wp.page',		YourClass::class); // le0daniel\System\WordPress\Page
+$app->bind('wp.post',		YourClass::class); // le0daniel\System\WordPress\Post
+$app->bind('wp.site',		YourClass::class); // le0daniel\System\WordPress\Site
+$app->bind('wp.user',		YourClass::class); // le0daniel\System\WordPress\User
+$app->bind('wp.shortcode',	YourClass::class); // le0daniel\System\WordPress\ShortCode
+```
 
-[roots-wp-salt]:https://roots.io/salts.html
-[wp-cli-dotenv]:https://github.com/aaemnnosttv/wp-cli-dotenv-command
+The view configuration options are explaind below in the view section.
+
+
+
+## View
+
+The view class (`le0daniel\System\View\View`) is the wrapper around twig. It contains easy methods to render, add functions and filters, set include paths for twig. The view object is registered as a singleton in the Service Container. Following configuration options / methods exist:
+
+```php
+/** @var le0daniel\System\View\View $view */
+$view = view();
+
+/**
+ * Sets the view root dir. 
+ * MUST be set before anything can be rendered. Cannot be changed after 
+ * something has been rendered.
+ */
+$view->setRootDir('path/to/your/views');
+
+/**
+ * This adds an alias (called: @alias in twig template)
+ * Those paths can be added any time.
+ */
+$view->addIncludePath('path/to/your/path','alias')
+  
+/**
+ * Share Data with all views, can be accessed by every template!
+ */
+$view->share('key','value');  
+
+/**
+ * Add Function and Filters
+ * Documentation of Available filters and Functions found in twig official Docs
+ */
+$view->addFunction(
+  /* callable */ '\le0daniel\myfunction',
+  /* string   */ 'FunctionAliasTemplate',
+  /* array    */ ['Params according to twig documentation']
+);
+
+/**
+ * Render
+ * Renders a view to html
+ *
+ * @return string $html
+ */
+$string_html = $view->render(
+  'template.twig',
+  ['Data'=>'Array'],
+  /* Default: true  */ $with_context,
+  /* Default: false */ $force_plain_cache,
+  /* Default: -1    */ $cache_duration,
+); 
+
+/**
+ * Show
+ * Renders and outputs a view
+ *
+ * if terminate is true, the script quits after this.
+ * @return void
+ */
+$view->show(
+  'template.twig',
+  ['Data'=>'Array'],
+  /* Default: true  */ $terminate
+); 
+```
+
+
+
+Following filters are available for all templates:
+
+* `theme_path`  returns url relative to theme root
+* `static_path`  returns url relative to the themes static folder. This should be used to include files any file
+* `mix(rewrite=false)`  returns versioned url (with id query) if possible, optionally use `mix(true)` to rewrite the url into a more SEO friendly format: `.../static/##key##/script.js` 
+* `t` or `translate` translate using the default context set in `functions.php` file
+* `eclipse(lenght=55)` shortens a string to a max lenght, default is 55 
+  You can pass any lenght using `eclips(200)`
+
+
+
+Following functions are available for all templates:
+
+* `function(callable)` calls a function (usecase mostly for Wordpress functions) and returns the output or echo. The output is always escaped, so if you want to use the output as safe HTML be sure to add the `raw` filter. Example: `{{ function('my_nav_function') | raw }}`
+  By default this is used to call `wp_head` and `wp_footer` 
+* `field(name,id=false)` returns a ACF field value (using `get_field`)
+  ​
