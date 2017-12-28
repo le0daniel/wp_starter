@@ -29,3 +29,6 @@ vendor/*
 # Node
 node_modules/*
 !node_modules/.gitkeep
+
+# Apple File
+.DS_Store
