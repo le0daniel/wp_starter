@@ -1,6 +1,6 @@
 /* Config */
-const theme_root_path = __dirname + '/web/app/themes'
-const relative_theme_root_path = 'web/app/themes'
+const theme_root_path = __dirname + '/public/app/themes'
+const relative_theme_root_path = 'public/app/themes'
 /* %ThemeName% */
 
 /* Helpers */
