@@ -1,10 +1,10 @@
 # Application
-public_html/app/plugins/*
-!public_html/app/plugins/.gitkeep
-public_html/app/mu-plugins/*/
-public_html/app/upgrade
-public_html/app/uploads/*
-!public_html/app/uploads/.gitkeep
+public/app/plugins/*
+!public/app/plugins/.gitkeep
+public/app/mu-plugins/*/
+public/app/upgrade
+public/app/uploads/*
+!public/app/uploads/.gitkeep
 
 #storage
 storage/log/*
@@ -14,8 +14,8 @@ storage/log/*
 cache/
 
 # WordPress
-public_html/wp
-public_html/.htaccess
+public/wp
+public/.htaccess
 
 # Dotenv
 .env
