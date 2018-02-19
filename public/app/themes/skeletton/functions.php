@@ -131,19 +131,7 @@ view()
 	->addIncludePath($view_root.'/components','c')
 	->addIncludePath($view_root.'/pages',     'pages')
 	->addIncludePath($view_root.'/layouts',   'layouts')
-	->addIncludePath($view_root.'/shortcodes','shorts')
-
-	/**
-	 * Add The context
-	 * Must implement CastArray contract
-	 *
-	 * Is lazy loaded! Resolved when needed!
-	 * will be resolve container!
-	 */
-	//->addContext( 'wp.context' )
-
-	/* Share some data! */
-	->share('meta_tags',[]);
+	->addIncludePath($view_root.'/shortcodes','shorts');
 
 /**
  * -------------------------------------------------------------

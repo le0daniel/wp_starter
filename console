@@ -15,6 +15,6 @@ require_once __DIR__.'/config/application.php';
  * This does basically just expose the app() function which is used to
  * boot the app. It's lazy loaded, as long as it is not called, nothing will happen!
  */
-\le0daniel\System\App::init($root_dir);
+\le0daniel\System\App::init($GLOBALS['root_dir']);
 $app = app();
 $app->run();

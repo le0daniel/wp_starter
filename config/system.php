@@ -10,5 +10,7 @@ return [
 	'providers'=>[
 		\le0daniel\System\ServiceProviders\Log::class,
 	],
+
+	/* If you want to use classes as controllers */
 	'map_controllers_to_classes'=>false,
 ];

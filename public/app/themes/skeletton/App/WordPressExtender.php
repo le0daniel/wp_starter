@@ -45,4 +45,13 @@ class WordPressExtender extends AddLogic {
 
 	];
 
+	/**
+	 * Contains the Json Api Classes
+	 *
+	 * @var array
+	 */
+	protected $json_endpoints = [
+
+	];
+
 }

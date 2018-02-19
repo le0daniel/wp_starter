@@ -11,6 +11,6 @@ Header set Cache-Control "max-age=2592000, public"
 # Requires to use mix(true) as filter
 <IfModule mod_rewrite.c>
 RewriteEngine On
-RewriteRule !(.*)\.(css|jpg|jpeg|png|gif|js|ico)$ - [L,F]
+RewriteRule !(.*)\.(css|jpg|jpeg|png|gif|js|ico|pdf)$ - [L,F]
 RewriteRule ^([a-z0-9]+)/([a-zA-Z0-9_]+)\.(js|css)$ $2.$3 [L]
 </IfModule>
